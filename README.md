@@ -1,2 +1,2 @@
-# Dicion-rio-API
+# Dicionário-API
 Dicionário de palavras e etiquetas
