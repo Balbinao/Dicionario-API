@@ -72,11 +72,7 @@ public class Word {
 
     @Override
     public String toString() {
-        return "Word{" +
-                "wordId=" + wordId +
-                ", term='" + term + '\'' +
-                ", labelList=" + labelList +
-                '}';
+        return "Word{id=" + wordId + ", term='" + term + "'}";
     }
 
 

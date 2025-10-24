@@ -11,8 +11,8 @@ import java.util.Set;
 @Repository
 public interface WordRepository extends JpaRepository<Word, Long> {
 
-    //Set<Word> findByLabelList(String labelName);
+   Set<Word> findByLabelList_LabelName(String labelName);
 
-    //@Query("SELECT w FROM Word w JOIN w.labels l WHERE l.name = :labelName")
-    //Set<Word> findByLabel(@Param("labelName") String labelName);
+//    @Query("SELECT l FROM Label l JOIN FETCH l.wordList WHERE l.labelName = :labelName")
+//    Set<Word> findByLabelList_LabelName(@Param("labelName") String labelName);
 }

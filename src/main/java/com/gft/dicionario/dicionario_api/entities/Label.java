@@ -62,10 +62,6 @@ public class Label {
 
     @Override
     public String toString() {
-        return "Label{" +
-                "labelId=" + labelId +
-                ", labelName='" + labelName + '\'' +
-                ", wordList=" + wordList +
-                '}';
+        return "Label{id=" + labelId + ", name='" + labelName + "'}";
     }
 }
