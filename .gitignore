@@ -34,4 +34,4 @@ build/
 
 
 # Configurações sensíveis
-application-secret.properties
+src/main/resources/application-secret.properties
