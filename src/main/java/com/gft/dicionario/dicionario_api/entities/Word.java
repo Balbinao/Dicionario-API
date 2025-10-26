@@ -58,22 +58,5 @@ public class Word {
         this.labelList = labelList;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Word word = (Word) o;
-        return Objects.equals(wordId, word.wordId) && Objects.equals(term, word.term) && Objects.equals(labelList, word.labelList);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(wordId, term, labelList);
-    }
-
-    @Override
-    public String toString() {
-        return "Word{id=" + wordId + ", term='" + term + "'}";
-    }
-
 
 }
