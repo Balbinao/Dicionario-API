@@ -24,6 +24,8 @@ public class Label {
     private Set<Word> wordList = new HashSet<>();
 
 
+    public Label(){}
+
     public Long getLabelId() {
         return labelId;
     }
