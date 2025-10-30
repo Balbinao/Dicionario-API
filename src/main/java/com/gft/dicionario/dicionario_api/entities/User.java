@@ -1,6 +1,8 @@
 package com.gft.dicionario.dicionario_api.entities;
 
+import com.gft.dicionario.dicionario_api.dto.LoginRequest;
 import jakarta.persistence.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -70,24 +72,7 @@ public class User {
         this.roles = roles;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(userId, user.userId) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(roles, user.roles);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userId, username, password, roles);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", username='" + username + '\'' +
-                ", roles=" + roles +
-                '}';
+    public boolean isLoginCorrect(LoginRequest loginRequest, BCryptPasswordEncoder encoder) {
+        return encoder.matches(loginRequest.password(), this.password);
     }
 }
