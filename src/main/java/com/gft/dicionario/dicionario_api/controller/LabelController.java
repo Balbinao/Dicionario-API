@@ -6,6 +6,7 @@ import com.gft.dicionario.dicionario_api.entities.Label;
 import com.gft.dicionario.dicionario_api.entities.Word;
 import com.gft.dicionario.dicionario_api.service.LabelService;
 import com.gft.dicionario.dicionario_api.service.WordService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,6 +36,7 @@ public class LabelController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public LabelDTO create (@RequestBody Label label){
         Label labelSaved = labelService.save(label);
 
@@ -42,6 +44,7 @@ public class LabelController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public LabelDTO update(@PathVariable Long id, @RequestBody Label updateLabel){
         Label label = labelService.findById(id).orElseThrow();
         label.setLabelName(updateLabel.getLabelName());
@@ -52,6 +55,7 @@ public class LabelController {
 
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void delete(@PathVariable Long id){
         labelService.deleteById(id);
     }
@@ -63,6 +67,7 @@ public class LabelController {
     }
 
     @PutMapping("/{labelId}/add-word/{wordId}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public LabelDTO addWordToLabel(@PathVariable Long labelId, @PathVariable Long wordId) {
         Label label = labelService.findById(labelId).orElseThrow();
         Word word = wordService.findById(wordId).orElseThrow();
@@ -72,9 +77,6 @@ public class LabelController {
 
         return toDTO(label);
     }
-
-
-
 
     private LabelDTO toDTO(Label label) {
         return new LabelDTO(

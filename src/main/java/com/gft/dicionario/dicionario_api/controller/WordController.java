@@ -7,6 +7,7 @@ import com.gft.dicionario.dicionario_api.entities.Word;
 import com.gft.dicionario.dicionario_api.service.LabelService;
 import com.gft.dicionario.dicionario_api.service.WordService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,13 +38,16 @@ public class WordController {
         return toDTO(word);
     }
 
+
     @PostMapping
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public WordDTO create(@RequestBody Word word){
         Word wordSaved = wordService.save(word);
         return toDTO(wordSaved);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public WordDTO update(@PathVariable Long id, @RequestBody Word updatedWord){
         Word word = wordService.findById(id).orElseThrow();
         word.setTerm(updatedWord.getTerm());
@@ -52,6 +56,7 @@ public class WordController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void delete(@PathVariable Long id){
         wordService.deleteById(id);
     }
@@ -63,6 +68,7 @@ public class WordController {
     }
 
     @PutMapping("/{wordId}/add-label/{labelId}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public WordDTO addLabelToWord(@PathVariable Long wordId, @PathVariable Long labelId) {
         Word word = wordService.findById(wordId).orElseThrow();
         Label label = labelService.findById(labelId).orElseThrow();
