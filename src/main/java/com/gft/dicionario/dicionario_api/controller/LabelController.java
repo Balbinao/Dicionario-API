@@ -31,7 +31,7 @@ public class LabelController {
 
     @GetMapping("/{id}")
     public LabelDTO getById(@PathVariable Long id){
-        Label label = labelService.findById(id).orElseThrow();
+        Label label = labelService.findById(id);
         return toDTO(label);
     }
 
@@ -46,7 +46,7 @@ public class LabelController {
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public LabelDTO update(@PathVariable Long id, @RequestBody Label updateLabel){
-        Label label = labelService.findById(id).orElseThrow();
+        Label label = labelService.findById(id);
         label.setLabelName(updateLabel.getLabelName());
         label.setWordList(updateLabel.getWordList());
         Label labelSaved = labelService.save(label);
@@ -69,8 +69,8 @@ public class LabelController {
     @PutMapping("/{labelId}/add-word/{wordId}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public LabelDTO addWordToLabel(@PathVariable Long labelId, @PathVariable Long wordId) {
-        Label label = labelService.findById(labelId).orElseThrow();
-        Word word = wordService.findById(wordId).orElseThrow();
+        Label label = labelService.findById(labelId);
+        Word word = wordService.findById(wordId);
 
         word.getLabelList().add(label); // lado dono
         wordService.save(word);

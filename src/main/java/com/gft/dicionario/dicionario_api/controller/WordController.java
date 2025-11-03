@@ -34,7 +34,7 @@ public class WordController {
 
     @GetMapping("/{id}")
     public WordDTO getById(@PathVariable  Long id){
-        Word word = wordService.findById(id).orElseThrow();
+        Word word = wordService.findById(id);
         return toDTO(word);
     }
 
@@ -49,7 +49,7 @@ public class WordController {
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public WordDTO update(@PathVariable Long id, @RequestBody Word updatedWord){
-        Word word = wordService.findById(id).orElseThrow();
+        Word word = wordService.findById(id);
         word.setTerm(updatedWord.getTerm());
         Word wordSaved = wordService.save(word);
         return toDTO(wordSaved);
@@ -70,8 +70,8 @@ public class WordController {
     @PutMapping("/{wordId}/add-label/{labelId}")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public WordDTO addLabelToWord(@PathVariable Long wordId, @PathVariable Long labelId) {
-        Word word = wordService.findById(wordId).orElseThrow();
-        Label label = labelService.findById(labelId).orElseThrow();
+        Word word = wordService.findById(wordId);
+        Label label = labelService.findById(labelId);
 
         word.getLabelList().add(label);
         Word saved = wordService.save(word);
